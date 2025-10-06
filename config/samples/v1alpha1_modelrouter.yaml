@@ -1,0 +1,12 @@
+apiVersion: agentic-layer.ai/v1alpha1
+kind: ModelRouter
+metadata:
+  labels:
+    app.kubernetes.io/name: ai-gateway-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: my-litellm
+spec:
+  type: litellm
+  aiModels:
+    - name: openai/gpt-3.5-turbo
+    - name: gemini/gemini-1.5-pro

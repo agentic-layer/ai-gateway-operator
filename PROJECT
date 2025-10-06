@@ -10,4 +10,16 @@ plugins:
   scorecard.sdk.operatorframework.io/v2: {}
 projectName: ai-gateway-operator
 repo: github.com/agentic-layer/ai-gateway-operator
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  domain: agentic-layer.ai
+  kind: ModelRouter
+  path: github.com/agentic-layer/ai-gateway-operator/api/v1alpha1
+  version: v1alpha1
+  webhooks:
+    defaulting: true
+    validation: true
+    webhookVersion: v1
 version: "3"
