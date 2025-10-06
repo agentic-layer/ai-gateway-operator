@@ -2,4 +2,6 @@
 resources:
 - v1alpha1_modelrouter.yaml
 - _v1alpha1_modelrouter.yaml
+- v1alpha1_modelrouterclass.yaml
+- _v1alpha1_modelrouterclass.yaml
 # +kubebuilder:scaffold:manifestskustomizesamples

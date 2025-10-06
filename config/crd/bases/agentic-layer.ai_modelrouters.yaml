@@ -52,6 +52,11 @@ spec:
                   - name
                   type: object
                 type: array
+              modelRouterClassName:
+                description: |-
+                  ModelRouterClassName specifies which ModelRouterClass to use for this model router instance.
+                  This is only needed if multiple model router classes are defined in the cluster.
+                type: string
               port:
                 default: 4000
                 description: Port on which the model router will be exposed.
@@ -59,12 +64,6 @@ spec:
                 maximum: 65535
                 minimum: 1
                 type: integer
-              type:
-                description: 'NOTE: In the future, this will be a ModelRouterClass
-                  reference (similar to the AgentGatewayClass) instead.'
-                type: string
-            required:
-            - type
             type: object
           status:
             description: ModelRouterStatus defines the observed state of ModelRouter.

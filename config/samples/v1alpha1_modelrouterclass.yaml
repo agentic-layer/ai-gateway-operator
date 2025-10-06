@@ -1,0 +1,11 @@
+apiVersion: agentic-layer.ai/v1alpha1
+kind: ModelRouterClass
+metadata:
+  labels:
+    app.kubernetes.io/name: ai-gateway-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: litellm
+  annotations:
+    modelrouter.kubernetes.io/is-default-class: "true"
+spec:
+  controller: aigateway.agentic-layer.ai/model-router-litellm-controller

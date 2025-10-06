@@ -22,4 +22,11 @@ resources:
     defaulting: true
     validation: true
     webhookVersion: v1
+- api:
+    crdVersion: v1
+    namespaced: true
+  domain: agentic-layer.ai
+  kind: ModelRouterClass
+  path: github.com/agentic-layer/ai-gateway-operator/api/v1alpha1
+  version: v1alpha1
 version: "3"

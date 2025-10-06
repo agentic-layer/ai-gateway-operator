@@ -22,8 +22,9 @@ import (
 
 // ModelRouterSpec defines the desired state of ModelRouter.
 type ModelRouterSpec struct {
-	// NOTE: In the future, this will be a ModelRouterClass reference (similar to the AgentGatewayClass) instead.
-	Type string `json:"type"`
+	// ModelRouterClassName specifies which ModelRouterClass to use for this model router instance.
+	// This is only needed if multiple model router classes are defined in the cluster.
+	ModelRouterClassName string `json:"modelRouterClassName,omitempty"`
 
 	// Port on which the model router will be exposed.
 	// +kubebuilder:validation:Minimum=1
