@@ -209,6 +209,13 @@ func main() {
 			os.Exit(1)
 		}
 	}
+	// nolint:goconst
+	if os.Getenv("ENABLE_WEBHOOKS") != "false" {
+		if err := webhookv1alpha1.SetupModelRouterClassWebhookWithManager(mgr); err != nil {
+			setupLog.Error(err, "unable to create webhook", "webhook", "ModelRouterClass")
+			os.Exit(1)
+		}
+	}
 	// +kubebuilder:scaffold:builder
 
 	if metricsCertWatcher != nil {

@@ -124,11 +124,6 @@ func (v *ModelRouterCustomValidator) ValidateDelete(ctx context.Context, obj run
 // validateModelRouterSpec contains the core validation logic for the ModelRouter spec.
 // It's called by both ValidateCreate and ValidateUpdate.
 func (v *ModelRouterCustomValidator) validateModelRouterSpec(modelRouter *gatewayv1alpha1.ModelRouter) (admission.Warnings, error) {
-	// Validate type is specified (allow any non-empty string - other operators may implement different types)
-	if modelRouter.Spec.Type == "" {
-		return nil, errors.New("model router must specify a type")
-	}
-
 	// Validate port is positive
 	if modelRouter.Spec.Port <= 0 {
 		return nil, fmt.Errorf("modelRouter port must be positive, got: %d", modelRouter.Spec.Port)
