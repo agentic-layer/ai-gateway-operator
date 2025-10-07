@@ -23,6 +23,10 @@ import (
 	agenticlayeraiv1alpha1 "github.com/agentic-layer/ai-gateway-operator/api/v1alpha1"
 )
 
+const (
+	testController = "test-controller"
+)
+
 var _ = Describe("AiGatewayClass Webhook", func() {
 	var (
 		obj       *agenticlayeraiv1alpha1.AiGatewayClass
@@ -52,7 +56,7 @@ var _ = Describe("AiGatewayClass Webhook", func() {
 		It("Should allow creation when no default class annotation is set", func() {
 			By("Creating a AiGatewayClass without default annotation")
 			obj.SetName("test-class-no-default")
-			obj.Spec.Controller = "test-controller"
+			obj.Spec.Controller = testController
 
 			warnings, err := validator.ValidateCreate(ctx, obj)
 			Expect(err).NotTo(HaveOccurred())
@@ -62,7 +66,7 @@ var _ = Describe("AiGatewayClass Webhook", func() {
 		It("Should allow creation when this is the first default class", func() {
 			By("Creating a AiGatewayClass with default annotation")
 			obj.SetName("test-class-first-default")
-			obj.Spec.Controller = "test-controller"
+			obj.Spec.Controller = testController
 			obj.SetAnnotations(map[string]string{
 				DefaultClassAnnotation: "true",
 			})
@@ -77,7 +81,7 @@ var _ = Describe("AiGatewayClass Webhook", func() {
 			existingClass := &agenticlayeraiv1alpha1.AiGatewayClass{}
 			existingClass.SetName("existing-default-class")
 			existingClass.SetNamespace("default")
-			existingClass.Spec.Controller = "test-controller"
+			existingClass.Spec.Controller = testController
 			existingClass.SetAnnotations(map[string]string{
 				DefaultClassAnnotation: "true",
 			})
@@ -85,7 +89,7 @@ var _ = Describe("AiGatewayClass Webhook", func() {
 
 			By("Attempting to create a second default class")
 			obj.SetName("test-class-second-default")
-			obj.Spec.Controller = "test-controller"
+			obj.Spec.Controller = testController
 			obj.SetAnnotations(map[string]string{
 				DefaultClassAnnotation: "true",
 			})
@@ -116,7 +120,7 @@ var _ = Describe("AiGatewayClass Webhook", func() {
 			By("Creating a non-default class")
 			obj.SetName("test-class-update-no-default")
 			obj.SetNamespace("default")
-			obj.Spec.Controller = "test-controller"
+			obj.Spec.Controller = testController
 			Expect(k8sClient.Create(ctx, obj)).To(Succeed())
 
 			By("Updating the class without default annotation")
@@ -135,7 +139,7 @@ var _ = Describe("AiGatewayClass Webhook", func() {
 			By("Creating a default class")
 			obj.SetName("test-class-update-same-default")
 			obj.SetNamespace("default")
-			obj.Spec.Controller = "test-controller"
+			obj.Spec.Controller = testController
 			obj.SetAnnotations(map[string]string{
 				DefaultClassAnnotation: "true",
 			})
@@ -158,7 +162,7 @@ var _ = Describe("AiGatewayClass Webhook", func() {
 			existingClass := &agenticlayeraiv1alpha1.AiGatewayClass{}
 			existingClass.SetName("existing-default-class-update")
 			existingClass.SetNamespace("default")
-			existingClass.Spec.Controller = "test-controller"
+			existingClass.Spec.Controller = testController
 			existingClass.SetAnnotations(map[string]string{
 				DefaultClassAnnotation: "true",
 			})
@@ -167,7 +171,7 @@ var _ = Describe("AiGatewayClass Webhook", func() {
 			By("Creating a non-default class")
 			obj.SetName("test-class-update-to-default")
 			obj.SetNamespace("default")
-			obj.Spec.Controller = "test-controller"
+			obj.Spec.Controller = testController
 			Expect(k8sClient.Create(ctx, obj)).To(Succeed())
 
 			By("Attempting to update it to be default")
@@ -203,7 +207,7 @@ var _ = Describe("AiGatewayClass Webhook", func() {
 		It("Should always allow deletion", func() {
 			By("Creating a AiGatewayClass")
 			obj.SetName("test-class-delete")
-			obj.Spec.Controller = "test-controller"
+			obj.Spec.Controller = testController
 			obj.SetAnnotations(map[string]string{
 				DefaultClassAnnotation: "true",
 			})
