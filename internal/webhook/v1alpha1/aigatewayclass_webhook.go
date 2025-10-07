@@ -42,7 +42,7 @@ var aiGatewayClassLog = logf.Log.WithName("aigatewayclass-resource")
 // SetupAiGatewayClassWebhookWithManager registers the webhook for AiGatewayClass in the manager.
 func SetupAiGatewayClassWebhookWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewWebhookManagedBy(mgr).For(&aigatewayv1alpha1.AiGatewayClass{}).
-		WithValidator(&AiGatewayClassCustomValidator{}).
+		WithValidator(&AiGatewayClassCustomValidator{Client: mgr.GetClient()}).
 		Complete()
 }
 
