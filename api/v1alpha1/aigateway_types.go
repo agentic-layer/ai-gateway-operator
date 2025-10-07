@@ -20,19 +20,19 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// ModelRouterSpec defines the desired state of ModelRouter.
-type ModelRouterSpec struct {
-	// ModelRouterClassName specifies which ModelRouterClass to use for this model router instance.
-	// This is only needed if multiple model router classes are defined in the cluster.
-	ModelRouterClassName string `json:"modelRouterClassName,omitempty"`
+// AiGatewaySpec defines the desired state of AiGateway.
+type AiGatewaySpec struct {
+	// AiGatewayClassName specifies which AiGatewayClass to use for this AI gateway instance.
+	// This is only needed if multiple AI gateway classes are defined in the cluster.
+	AiGatewayClassName string `json:"aiGatewayClassName,omitempty"`
 
-	// Port on which the model router will be exposed.
+	// Port on which the AI gateway will be exposed.
 	// +kubebuilder:validation:Minimum=1
 	// +kubebuilder:validation:Maximum=65535
 	// +kubebuilder:default=4000
 	Port int32 `json:"port,omitempty"`
 
-	// List of AI models to be made available through the router.
+	// List of AI models to be made available through the gateway.
 	AiModels []AiModel `json:"aiModels,omitempty"`
 }
 
@@ -42,8 +42,8 @@ type AiModel struct {
 	Name string `json:"name"`
 }
 
-// ModelRouterStatus defines the observed state of ModelRouter.
-type ModelRouterStatus struct {
+// AiGatewayStatus defines the observed state of AiGateway.
+type AiGatewayStatus struct {
 	// +operator-sdk:csv:customresourcedefinitions:type=status
 	Conditions []metav1.Condition `json:"conditions,omitempty" patchStrategy:"merge" patchMergeKey:"type" protobuf:"bytes,1,rep,name=conditions"`
 }
@@ -51,24 +51,24 @@ type ModelRouterStatus struct {
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// ModelRouter is the Schema for the modelrouters API.
-type ModelRouter struct {
+// AiGateway is the Schema for the AI gateways API.
+type AiGateway struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   ModelRouterSpec   `json:"spec,omitempty"`
-	Status ModelRouterStatus `json:"status,omitempty"`
+	Spec   AiGatewaySpec   `json:"spec,omitempty"`
+	Status AiGatewayStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// ModelRouterList contains a list of ModelRouter.
-type ModelRouterList struct {
+// AiGatewayList contains a list of AiGateway.
+type AiGatewayList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []ModelRouter `json:"items"`
+	Items           []AiGateway `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&ModelRouter{}, &ModelRouterList{})
+	SchemeBuilder.Register(&AiGateway{}, &AiGatewayList{})
 }

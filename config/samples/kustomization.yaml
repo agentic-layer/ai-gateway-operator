@@ -1,7 +1,7 @@
 ## Append samples of your project ##
 resources:
-- v1alpha1_modelrouter.yaml
-- _v1alpha1_modelrouter.yaml
-- v1alpha1_modelrouterclass.yaml
-- _v1alpha1_modelrouterclass.yaml
+- v1alpha1_aigateway.yaml
+- _v1alpha1_aigateway.yaml
+- v1alpha1_aigatewayclass.yaml
+- _v1alpha1_aigatewayclass.yaml
 # +kubebuilder:scaffold:manifestskustomizesamples

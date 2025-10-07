@@ -109,10 +109,10 @@ var _ = BeforeSuite(func() {
 	})
 	Expect(err).NotTo(HaveOccurred())
 
-	err = SetupModelRouterWebhookWithManager(mgr)
+	err = SetupAiGatewayWebhookWithManager(mgr)
 	Expect(err).NotTo(HaveOccurred())
 
-	err = SetupModelRouterClassWebhookWithManager(mgr)
+	err = SetupAiGatewayClassWebhookWithManager(mgr)
 	Expect(err).NotTo(HaveOccurred())
 
 	// +kubebuilder:scaffold:webhook

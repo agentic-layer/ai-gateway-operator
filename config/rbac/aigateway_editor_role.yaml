@@ -11,12 +11,12 @@ metadata:
   labels:
     app.kubernetes.io/name: ai-gateway-operator
     app.kubernetes.io/managed-by: kustomize
-  name: modelrouter-editor-role
+  name: aigateway-editor-role
 rules:
 - apiGroups:
   - agentic-layer.ai
   resources:
-  - modelrouters
+  - aigateways
   verbs:
   - create
   - delete
@@ -28,6 +28,6 @@ rules:
 - apiGroups:
   - agentic-layer.ai
   resources:
-  - modelrouters/status
+  - aigateways/status
   verbs:
   - get

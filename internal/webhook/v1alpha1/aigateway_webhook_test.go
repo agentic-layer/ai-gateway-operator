@@ -23,20 +23,20 @@ import (
 	gatewayv1alpha1 "github.com/agentic-layer/ai-gateway-operator/api/v1alpha1"
 )
 
-var _ = Describe("ModelRouter Webhook", func() {
+var _ = Describe("AiGateway Webhook", func() {
 	var (
-		obj       *gatewayv1alpha1.ModelRouter
-		oldObj    *gatewayv1alpha1.ModelRouter
-		validator ModelRouterCustomValidator
-		defaulter ModelRouterCustomDefaulter
+		obj       *gatewayv1alpha1.AiGateway
+		oldObj    *gatewayv1alpha1.AiGateway
+		validator AiGatewayCustomValidator
+		defaulter AiGatewayCustomDefaulter
 	)
 
 	BeforeEach(func() {
-		obj = &gatewayv1alpha1.ModelRouter{}
-		oldObj = &gatewayv1alpha1.ModelRouter{}
-		validator = ModelRouterCustomValidator{}
+		obj = &gatewayv1alpha1.AiGateway{}
+		oldObj = &gatewayv1alpha1.AiGateway{}
+		validator = AiGatewayCustomValidator{}
 		Expect(validator).NotTo(BeNil(), "Expected validator to be initialized")
-		defaulter = ModelRouterCustomDefaulter{}
+		defaulter = AiGatewayCustomDefaulter{}
 		Expect(defaulter).NotTo(BeNil(), "Expected defaulter to be initialized")
 		Expect(oldObj).NotTo(BeNil(), "Expected oldObj to be initialized")
 		Expect(obj).NotTo(BeNil(), "Expected obj to be initialized")
@@ -47,7 +47,7 @@ var _ = Describe("ModelRouter Webhook", func() {
 		// TODO (user): Add any teardown logic common to all tests
 	})
 
-	Context("When creating ModelRouter under Defaulting Webhook", func() {
+	Context("When creating AiGateway under Defaulting Webhook", func() {
 		// TODO (user): Add logic for defaulting webhooks
 		// Example:
 		// It("Should apply defaults when a required field is empty", func() {
@@ -60,7 +60,7 @@ var _ = Describe("ModelRouter Webhook", func() {
 		// })
 	})
 
-	Context("When creating or updating ModelRouter under Validating Webhook", func() {
+	Context("When creating or updating AiGateway under Validating Webhook", func() {
 		// TODO (user): Add logic for validating webhooks
 		// Example:
 		// It("Should deny creation if a required field is missing", func() {

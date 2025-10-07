@@ -23,34 +23,34 @@ import (
 	agenticlayeraiv1alpha1 "github.com/agentic-layer/ai-gateway-operator/api/v1alpha1"
 )
 
-var _ = Describe("ModelRouterClass Webhook", func() {
+var _ = Describe("AiGatewayClass Webhook", func() {
 	var (
-		obj       *agenticlayeraiv1alpha1.ModelRouterClass
-		oldObj    *agenticlayeraiv1alpha1.ModelRouterClass
-		validator ModelRouterClassCustomValidator
+		obj       *agenticlayeraiv1alpha1.AiGatewayClass
+		oldObj    *agenticlayeraiv1alpha1.AiGatewayClass
+		validator AiGatewayClassCustomValidator
 	)
 
 	BeforeEach(func() {
-		obj = &agenticlayeraiv1alpha1.ModelRouterClass{}
-		oldObj = &agenticlayeraiv1alpha1.ModelRouterClass{}
-		validator = ModelRouterClassCustomValidator{Client: k8sClient}
+		obj = &agenticlayeraiv1alpha1.AiGatewayClass{}
+		oldObj = &agenticlayeraiv1alpha1.AiGatewayClass{}
+		validator = AiGatewayClassCustomValidator{Client: k8sClient}
 		Expect(validator).NotTo(BeNil(), "Expected validator to be initialized")
 		Expect(oldObj).NotTo(BeNil(), "Expected oldObj to be initialized")
 		Expect(obj).NotTo(BeNil(), "Expected obj to be initialized")
 	})
 
 	AfterEach(func() {
-		// Clean up any ModelRouterClass resources created during tests
-		var classList agenticlayeraiv1alpha1.ModelRouterClassList
+		// Clean up any AiGatewayClass resources created during tests
+		var classList agenticlayeraiv1alpha1.AiGatewayClassList
 		_ = k8sClient.List(ctx, &classList)
 		for _, class := range classList.Items {
 			_ = k8sClient.Delete(ctx, &class)
 		}
 	})
 
-	Context("When creating ModelRouterClass under Validating Webhook", func() {
+	Context("When creating AiGatewayClass under Validating Webhook", func() {
 		It("Should allow creation when no default class annotation is set", func() {
-			By("Creating a ModelRouterClass without default annotation")
+			By("Creating a AiGatewayClass without default annotation")
 			obj.SetName("test-class-no-default")
 			obj.Spec.Controller = "test-controller"
 
@@ -60,7 +60,7 @@ var _ = Describe("ModelRouterClass Webhook", func() {
 		})
 
 		It("Should allow creation when this is the first default class", func() {
-			By("Creating a ModelRouterClass with default annotation")
+			By("Creating a AiGatewayClass with default annotation")
 			obj.SetName("test-class-first-default")
 			obj.Spec.Controller = "test-controller"
 			obj.SetAnnotations(map[string]string{
@@ -74,7 +74,7 @@ var _ = Describe("ModelRouterClass Webhook", func() {
 
 		It("Should deny creation when another default class already exists", func() {
 			By("Creating the first default class")
-			existingClass := &agenticlayeraiv1alpha1.ModelRouterClass{}
+			existingClass := &agenticlayeraiv1alpha1.AiGatewayClass{}
 			existingClass.SetName("existing-default-class")
 			existingClass.SetNamespace("default")
 			existingClass.Spec.Controller = "test-controller"
@@ -92,7 +92,7 @@ var _ = Describe("ModelRouterClass Webhook", func() {
 
 			warnings, err := validator.ValidateCreate(ctx, obj)
 			Expect(err).To(HaveOccurred())
-			Expect(err.Error()).To(ContainSubstring("another ModelRouterClass"))
+			Expect(err.Error()).To(ContainSubstring("another AiGatewayClass"))
 			Expect(err.Error()).To(ContainSubstring("existing-default-class"))
 			Expect(warnings).To(BeNil())
 
@@ -102,16 +102,16 @@ var _ = Describe("ModelRouterClass Webhook", func() {
 
 		It("Should return error when validating wrong object type", func() {
 			By("Passing a wrong object type to ValidateCreate")
-			wrongObj := &agenticlayeraiv1alpha1.ModelRouter{}
+			wrongObj := &agenticlayeraiv1alpha1.AiGateway{}
 
 			warnings, err := validator.ValidateCreate(ctx, wrongObj)
 			Expect(err).To(HaveOccurred())
-			Expect(err.Error()).To(ContainSubstring("expected a ModelRouterClass object"))
+			Expect(err.Error()).To(ContainSubstring("expected a AiGatewayClass object"))
 			Expect(warnings).To(BeNil())
 		})
 	})
 
-	Context("When updating ModelRouterClass under Validating Webhook", func() {
+	Context("When updating AiGatewayClass under Validating Webhook", func() {
 		It("Should allow update when no default annotation is involved", func() {
 			By("Creating a non-default class")
 			obj.SetName("test-class-update-no-default")
@@ -155,7 +155,7 @@ var _ = Describe("ModelRouterClass Webhook", func() {
 
 		It("Should deny update when trying to set default while another class is already default", func() {
 			By("Creating the first default class")
-			existingClass := &agenticlayeraiv1alpha1.ModelRouterClass{}
+			existingClass := &agenticlayeraiv1alpha1.AiGatewayClass{}
 			existingClass.SetName("existing-default-class-update")
 			existingClass.SetNamespace("default")
 			existingClass.Spec.Controller = "test-controller"
@@ -178,7 +178,7 @@ var _ = Describe("ModelRouterClass Webhook", func() {
 
 			warnings, err := validator.ValidateUpdate(ctx, oldObj, obj)
 			Expect(err).To(HaveOccurred())
-			Expect(err.Error()).To(ContainSubstring("another ModelRouterClass"))
+			Expect(err.Error()).To(ContainSubstring("another AiGatewayClass"))
 			Expect(err.Error()).To(ContainSubstring("existing-default-class-update"))
 			Expect(warnings).To(BeNil())
 
@@ -189,19 +189,19 @@ var _ = Describe("ModelRouterClass Webhook", func() {
 
 		It("Should return error when validating wrong object type", func() {
 			By("Passing a wrong object type to ValidateUpdate")
-			wrongObj := &agenticlayeraiv1alpha1.ModelRouter{}
-			wrongOldObj := &agenticlayeraiv1alpha1.ModelRouter{}
+			wrongObj := &agenticlayeraiv1alpha1.AiGateway{}
+			wrongOldObj := &agenticlayeraiv1alpha1.AiGateway{}
 
 			warnings, err := validator.ValidateUpdate(ctx, wrongOldObj, wrongObj)
 			Expect(err).To(HaveOccurred())
-			Expect(err.Error()).To(ContainSubstring("expected a ModelRouterClass object"))
+			Expect(err.Error()).To(ContainSubstring("expected a AiGatewayClass object"))
 			Expect(warnings).To(BeNil())
 		})
 	})
 
-	Context("When deleting ModelRouterClass under Validating Webhook", func() {
+	Context("When deleting AiGatewayClass under Validating Webhook", func() {
 		It("Should always allow deletion", func() {
-			By("Creating a ModelRouterClass")
+			By("Creating a AiGatewayClass")
 			obj.SetName("test-class-delete")
 			obj.Spec.Controller = "test-controller"
 			obj.SetAnnotations(map[string]string{
@@ -216,7 +216,7 @@ var _ = Describe("ModelRouterClass Webhook", func() {
 
 		It("Should allow deletion even for wrong object type", func() {
 			By("Passing a wrong object type to ValidateDelete")
-			wrongObj := &agenticlayeraiv1alpha1.ModelRouter{}
+			wrongObj := &agenticlayeraiv1alpha1.AiGateway{}
 
 			warnings, err := validator.ValidateDelete(ctx, wrongObj)
 			Expect(err).NotTo(HaveOccurred())

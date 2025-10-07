@@ -4,20 +4,20 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.18.0
-  name: modelrouterclasses.agentic-layer.ai
+  name: aigatewayclasses.agentic-layer.ai
 spec:
   group: agentic-layer.ai
   names:
-    kind: ModelRouterClass
-    listKind: ModelRouterClassList
-    plural: modelrouterclasses
-    singular: modelrouterclass
+    kind: AiGatewayClass
+    listKind: AiGatewayClassList
+    plural: aigatewayclasses
+    singular: aigatewayclass
   scope: Namespaced
   versions:
   - name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: ModelRouterClass is the Schema for the modelrouterclasses API.
+        description: AiGatewayClass is the Schema for the aigatewayclasses API.
         properties:
           apiVersion:
             description: |-
@@ -37,7 +37,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ModelRouterClassSpec defines the desired state of ModelRouterClass.
+            description: AiGatewayClassSpec defines the desired state of AiGatewayClass.
             properties:
               controller:
                 description: Controller is the name of the controller that should
@@ -47,7 +47,7 @@ spec:
             - controller
             type: object
           status:
-            description: ModelRouterClassStatus defines the observed state of ModelRouterClass.
+            description: AiGatewayClassStatus defines the observed state of AiGatewayClass.
             type: object
         type: object
     served: true

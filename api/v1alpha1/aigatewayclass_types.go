@@ -22,15 +22,15 @@ import (
 
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
-// ModelRouterClassSpec defines the desired state of ModelRouterClass.
-type ModelRouterClassSpec struct {
+// AiGatewayClassSpec defines the desired state of AiGatewayClass.
+type AiGatewayClassSpec struct {
 	// Controller is the name of the controller that should handle this gateway class
 	// +kubebuilder:validation:Required
 	Controller string `json:"controller"`
 }
 
-// ModelRouterClassStatus defines the observed state of ModelRouterClass.
-type ModelRouterClassStatus struct {
+// AiGatewayClassStatus defines the observed state of AiGatewayClass.
+type AiGatewayClassStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 }
@@ -38,24 +38,24 @@ type ModelRouterClassStatus struct {
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
-// ModelRouterClass is the Schema for the modelrouterclasses API.
-type ModelRouterClass struct {
+// AiGatewayClass is the Schema for the aigatewayclasses API.
+type AiGatewayClass struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   ModelRouterClassSpec   `json:"spec,omitempty"`
-	Status ModelRouterClassStatus `json:"status,omitempty"`
+	Spec   AiGatewayClassSpec   `json:"spec,omitempty"`
+	Status AiGatewayClassStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// ModelRouterClassList contains a list of ModelRouterClass.
-type ModelRouterClassList struct {
+// AiGatewayClassList contains a list of AiGatewayClass.
+type AiGatewayClassList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []ModelRouterClass `json:"items"`
+	Items           []AiGatewayClass `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&ModelRouterClass{}, &ModelRouterClassList{})
+	SchemeBuilder.Register(&AiGatewayClass{}, &AiGatewayClassList{})
 }

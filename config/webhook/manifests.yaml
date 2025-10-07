@@ -10,9 +10,9 @@ webhooks:
     service:
       name: webhook-service
       namespace: system
-      path: /mutate-gateway-agentic-layer-ai-v1alpha1-modelrouter
+      path: /mutate-gateway-agentic-layer-ai-v1alpha1-aigateway
   failurePolicy: Fail
-  name: modelrouter-v1alpha1.kb.io
+  name: aigateway-v1alpha1.kb.io
   rules:
   - apiGroups:
     - gateway.agentic-layer.ai
@@ -22,7 +22,7 @@ webhooks:
     - CREATE
     - UPDATE
     resources:
-    - modelrouters
+    - aigateways
   sideEffects: None
 ---
 apiVersion: admissionregistration.k8s.io/v1
@@ -36,9 +36,9 @@ webhooks:
     service:
       name: webhook-service
       namespace: system
-      path: /validate-gateway-agentic-layer-ai-v1alpha1-modelrouter
+      path: /validate-gateway-agentic-layer-ai-v1alpha1-aigateway
   failurePolicy: Fail
-  name: vmodelrouter-v1alpha1.kb.io
+  name: vaigateway-v1alpha1.kb.io
   rules:
   - apiGroups:
     - gateway.agentic-layer.ai
@@ -48,5 +48,25 @@ webhooks:
     - CREATE
     - UPDATE
     resources:
-    - modelrouters
+    - aigateways
+  sideEffects: None
+- admissionReviewVersions:
+  - v1
+  clientConfig:
+    service:
+      name: webhook-service
+      namespace: system
+      path: /validate-agentic-layer-ai-v1alpha1-aigatewayclass
+  failurePolicy: Fail
+  name: vaigatewayclass-v1alpha1.kb.io
+  rules:
+  - apiGroups:
+    - agentic-layer.ai
+    apiVersions:
+    - v1alpha1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - aigatewayclasses
   sideEffects: None
