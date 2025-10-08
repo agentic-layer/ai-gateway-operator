@@ -49,12 +49,16 @@ spec:
                 items:
                   properties:
                     name:
-                      description: |-
-                        Each model must specify a name in the format `provider/model-name`.
-                        See https://docs.litellm.ai/docs/providers for a list of supported providers.
+                      description: Name is the identifier for the AI model (e.g.,
+                        "gpt-4", "claude-3-opus")
+                      type: string
+                    provider:
+                      description: Provider specifies the AI provider (e.g., "openai",
+                        "anthropic", "azure")
                       type: string
                   required:
                   - name
+                  - provider
                   type: object
                 type: array
               port:

@@ -101,7 +101,7 @@ func (v *AiGatewayCustomValidator) ValidateCreate(_ context.Context, obj runtime
 }
 
 // ValidateUpdate implements webhook.CustomValidator so a webhook will be registered for the type AiGateway.
-func (v *AiGatewayCustomValidator) ValidateUpdate(_ context.Context, oldObj, newObj runtime.Object) (admission.Warnings, error) {
+func (v *AiGatewayCustomValidator) ValidateUpdate(_ context.Context, _, newObj runtime.Object) (admission.Warnings, error) {
 	aiGateway, ok := newObj.(*gatewayv1alpha1.AiGateway)
 	if !ok {
 		return nil, fmt.Errorf("expected a AiGateway object for the newObj but got %T", newObj)
@@ -111,7 +111,7 @@ func (v *AiGatewayCustomValidator) ValidateUpdate(_ context.Context, oldObj, new
 }
 
 // ValidateDelete implements webhook.CustomValidator so a webhook will be registered for the type AiGateway.
-func (v *AiGatewayCustomValidator) ValidateDelete(ctx context.Context, obj runtime.Object) (admission.Warnings, error) {
+func (v *AiGatewayCustomValidator) ValidateDelete(_ context.Context, obj runtime.Object) (admission.Warnings, error) {
 	aiGateway, ok := obj.(*gatewayv1alpha1.AiGateway)
 	if !ok {
 		return nil, fmt.Errorf("expected a AiGateway object but got %T", obj)

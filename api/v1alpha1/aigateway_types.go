@@ -37,9 +37,11 @@ type AiGatewaySpec struct {
 }
 
 type AiModel struct {
-	// Each model must specify a name in the format `provider/model-name`.
-	// See https://docs.litellm.ai/docs/providers for a list of supported providers.
+	// Name is the identifier for the AI model (e.g., "gpt-4", "claude-3-opus")
 	Name string `json:"name"`
+
+	// Provider specifies the AI provider (e.g., "openai", "anthropic", "azure")
+	Provider string `json:"provider"`
 }
 
 // AiGatewayStatus defines the observed state of AiGateway.
