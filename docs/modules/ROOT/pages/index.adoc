@@ -1,0 +1,19 @@
+= LiteLLM based AI Gateway
+
+This operator provides AI gateway capabilities for routing and managing requests to Large Language Models (LLMs) across multiple providers.
+Implementations are provided by other operators, such as https://github.com/agentic-layer/ai-gateway-litellm-operator[ai-gateway-litellm-operator].
+
+The AI Gateway is a component that sits between an AI Agent and a Large Language Model (LLM).
+It can handle tasks such as routing requests to different models, managing authentication, logging, and other middleware functions.
+
+== How-To Guides
+
+Step-by-step guides to get you up and running:
+
+* xref:operator:how-to-guide.adoc[]
+
+== Reference
+
+Detailed reference information for all components:
+
+* xref:operator:reference.adoc[]

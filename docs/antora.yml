@@ -1,0 +1,5 @@
+name: ai-gateway-operator
+title: AI Gateway Operator
+version: ~
+nav:
+- modules/ROOT/nav.adoc
