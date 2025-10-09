@@ -8,5 +8,7 @@ metadata:
 spec:
   aiGatewayClassName: litellm
   aiModels:
-    - name: openai/gpt-3.5-turbo
-    - name: gemini/gemini-1.5-pro
+    - name: gpt-3.5-turbo
+      provider: openai
+    - name: gemini-1.5-pro
+      provider: gemini

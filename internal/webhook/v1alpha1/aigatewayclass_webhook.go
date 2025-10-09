@@ -1,5 +1,5 @@
 /*
-Copyright 2025.
+Copyright 2025 Agentic Layer.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -73,7 +73,7 @@ func (v *AiGatewayClassCustomValidator) ValidateCreate(ctx context.Context, obj 
 }
 
 // ValidateUpdate implements webhook.CustomValidator so a webhook will be registered for the type AiGatewayClass.
-func (v *AiGatewayClassCustomValidator) ValidateUpdate(ctx context.Context, oldObj, newObj runtime.Object) (admission.Warnings, error) {
+func (v *AiGatewayClassCustomValidator) ValidateUpdate(ctx context.Context, _, newObj runtime.Object) (admission.Warnings, error) {
 	aiGatewayClass, ok := newObj.(*aigatewayv1alpha1.AiGatewayClass)
 	if !ok {
 		return nil, fmt.Errorf("expected a AiGatewayClass object for the newObj but got %T", newObj)
@@ -84,7 +84,7 @@ func (v *AiGatewayClassCustomValidator) ValidateUpdate(ctx context.Context, oldO
 }
 
 // ValidateDelete implements webhook.CustomValidator so a webhook will be registered for the type AiGatewayClass.
-func (v *AiGatewayClassCustomValidator) ValidateDelete(ctx context.Context, obj runtime.Object) (admission.Warnings, error) {
+func (v *AiGatewayClassCustomValidator) ValidateDelete(_ context.Context, _ runtime.Object) (admission.Warnings, error) {
 	// No validation needed on delete
 	return nil, nil
 }

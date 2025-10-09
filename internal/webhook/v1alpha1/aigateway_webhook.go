@@ -20,7 +20,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"strings"
 
 	"k8s.io/apimachinery/pkg/runtime"
 	ctrl "sigs.k8s.io/controller-runtime"
@@ -86,9 +85,6 @@ type AiGatewayCustomValidator struct {
 
 var _ webhook.CustomValidator = &AiGatewayCustomValidator{}
 
-// Use a constant for the separator to avoid magic strings.
-const providerModelSeparator = "/"
-
 // ValidateCreate implements webhook.CustomValidator so a webhook will be registered for the type AiGateway.
 func (v *AiGatewayCustomValidator) ValidateCreate(_ context.Context, obj runtime.Object) (admission.Warnings, error) {
 	aiGateway, ok := obj.(*gatewayv1alpha1.AiGateway)
@@ -134,22 +130,18 @@ func (v *AiGatewayCustomValidator) validateAiGatewaySpec(aiGateway *gatewayv1alp
 		return nil, errors.New("no AI models specified in AiGateway")
 	}
 
-	// Validate AI model names
+	// Validate AI models
 	for _, model := range aiGateway.Spec.AiModels {
 		if model.Name == "" {
 			return nil, errors.New("AI model name cannot be empty")
 		}
 
-		provider, modelName, found := strings.Cut(model.Name, providerModelSeparator)
-
-		// Handle malformed names like "gpt-4" (no separator) or "/gpt-4" (empty provider).
-		if !found || provider == "" || modelName == "" {
-			return nil, fmt.Errorf("model %q is malformed; format must be 'provider/model-name'", model.Name)
+		if model.Provider == "" {
+			return nil, errors.New("AI model provider cannot be empty")
 		}
 
-		// LiteLLM supports a vast number of providers, so we don't validate against a specific list.
-		// The controller will handle provider-specific configuration and the LiteLLM proxy will
-		// validate the actual model availability at runtime.
+		// The implementation operator will handle provider-specific configuration
+		// and validate the actual model availability at runtime.
 	}
 
 	return nil, nil

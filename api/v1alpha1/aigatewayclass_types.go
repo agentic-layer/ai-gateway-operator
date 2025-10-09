@@ -1,5 +1,5 @@
 /*
-Copyright 2025.
+Copyright 2025 Agentic Layer.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -31,8 +31,7 @@ type AiGatewayClassSpec struct {
 
 // AiGatewayClassStatus defines the observed state of AiGatewayClass.
 type AiGatewayClassStatus struct {
-	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
+	Conditions []metav1.Condition `json:"conditions,omitempty"`
 }
 
 // +kubebuilder:object:root=true
