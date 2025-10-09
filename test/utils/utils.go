@@ -32,7 +32,7 @@ const (
 	prometheusOperatorURL     = "https://github.com/prometheus-operator/prometheus-operator/" +
 		"releases/download/%s/bundle.yaml"
 
-	certmanagerVersion = "v1.16.3"
+	certmanagerVersion = "v1.18.2"
 	certmanagerURLTmpl = "https://github.com/cert-manager/cert-manager/releases/download/%s/cert-manager.yaml"
 )
 
@@ -124,6 +124,18 @@ func InstallCertManager() error {
 	// was re-installed after uninstalling on a cluster.
 	cmd = exec.Command("kubectl", "wait", "deployment.apps/cert-manager-webhook",
 		"--for", "condition=Available",
+		"--namespace", "cert-manager",
+		"--timeout", "5m",
+	)
+	if _, err := Run(cmd); err != nil {
+		return err
+	}
+
+	// Additionally wait for the CA bundle to be populated in the webhook configuration
+	// to ensure the webhook is fully operational.
+	// Certificates are populated asynchronously after the webhook deployment is ready.
+	cmd = exec.Command("kubectl", "wait", "validatingwebhookconfiguration/cert-manager-webhook",
+		"--for", "jsonpath={.webhooks[0].clientConfig.caBundle}",
 		"--namespace", "cert-manager",
 		"--timeout", "5m",
 	)
