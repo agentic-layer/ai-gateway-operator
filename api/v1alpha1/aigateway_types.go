@@ -48,6 +48,11 @@ type AiModel struct {
 type AiGatewayStatus struct {
 	// +operator-sdk:csv:customresourcedefinitions:type=status
 	Conditions []metav1.Condition `json:"conditions,omitempty" patchStrategy:"merge" patchMergeKey:"type" protobuf:"bytes,1,rep,name=conditions"`
+
+	// Url is the cluster-local URL where this AI Gateway can be accessed.
+	// Format: http://{name}.{namespace}.svc.cluster.local:{port}
+	// +optional
+	Url string `json:"url,omitempty"`
 }
 
 // +kubebuilder:object:root=true
