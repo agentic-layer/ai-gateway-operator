@@ -8,7 +8,7 @@ The operator is built with the [Operator SDK](https://sdk.operatorframework.io/d
 
 Get started with the AI Gateway Operator by following our comprehensive guides:
 
-- **[Install the AI Gateway Operator](https://docs.agentic-layer.ai/ai-gateway-operator/how-to-guide.html)** - Set up the operator on your Kubernetes cluster
+- **[Install the AI Gateway Operator](https://docs.agentic-layer.ai/ai-gateway-operator/operator/how-to-guide.html)** - Set up the operator on your Kubernetes cluster
 - **[Create your first AI Gateway](https://docs.agentic-layer.ai/ai-gateway-operator/gateway/how-to-guide.html)** - Deploy and configure AI gateways
 
 ## Development
