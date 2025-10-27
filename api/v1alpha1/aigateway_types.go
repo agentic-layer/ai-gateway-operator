@@ -33,14 +33,20 @@ type AiGatewaySpec struct {
 	Port int32 `json:"port,omitempty"`
 
 	// List of AI models to be made available through the gateway.
+	// +kubebuilder:validation:MinItems=1
+	// +kubebuilder:validation:Required
 	AiModels []AiModel `json:"aiModels,omitempty"`
 }
 
 type AiModel struct {
 	// Name is the identifier for the AI model (e.g., "gpt-4", "claude-3-opus")
+	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:MinLength=1
 	Name string `json:"name"`
 
 	// Provider specifies the AI provider (e.g., "openai", "anthropic", "azure")
+	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:MinLength=1
 	Provider string `json:"provider"`
 }
 

@@ -51,15 +51,18 @@ spec:
                     name:
                       description: Name is the identifier for the AI model (e.g.,
                         "gpt-4", "claude-3-opus")
+                      minLength: 1
                       type: string
                     provider:
                       description: Provider specifies the AI provider (e.g., "openai",
                         "anthropic", "azure")
+                      minLength: 1
                       type: string
                   required:
                   - name
                   - provider
                   type: object
+                minItems: 1
                 type: array
               port:
                 default: 4000
@@ -68,6 +71,8 @@ spec:
                 maximum: 65535
                 minimum: 1
                 type: integer
+            required:
+            - aiModels
             type: object
           status:
             description: AiGatewayStatus defines the observed state of AiGateway.
